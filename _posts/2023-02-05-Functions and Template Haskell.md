@@ -121,7 +121,7 @@ But sadly that won't work, the good old compiler will yell at us saying that: `r
 g x = let f y = x + y in f [|f|]
 ```
 
-Template Haskell needs to be able to expand `f` at compile time, nevertheless `f` is dependent on a runtime parameter `x`. What will the generated code look like? What is instantiated instead of `x`? TH doesn't quite know how to do.
+Template Haskell needs to be able to expand `f` at compile time, nevertheless `f` is dependent on a runtime parameter `x`. What will the generated code look like? What is instantiated instead of `x`? TH doesn't quite know what to do.
 
 So, if the problem is that we need to know about everything at compile time, and we need a way to overload the `assert` function in order to work on arbitrary types, it seems our best bet is typeclasses!
 
@@ -223,7 +223,7 @@ $(genFromJSONNarrowed @Nat @Int)
 {-# LANGUAGE FlexibleContexts      #-}
 
 
--- We expose just the type and its smart constructor
+
 module Domains.Internal.Example where
 
 import           Control.Monad       ((>=>))
