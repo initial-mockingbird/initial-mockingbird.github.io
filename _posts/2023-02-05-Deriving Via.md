@@ -23,8 +23,8 @@ newtype Nat = Nat Int
 
 -- | Yields a `Nat` whenever the input is non-negative, otherwise returns `Nothing`.
 mkNat :: Int -> Maybe Nat
-mkNat x | x < 0  = Nothing 
-mkNat x          = Just . Nat $ x
+mkNat x | x >= 0 = Just . Nat $ x
+mkNat _          = Nothing
 ```
 
 We will probably also need a way of serialize and deserialize this type, after all, the library will need a way to marshal values back and forth between the DBMS and Haskell. We shall use JSON as common representation(particularly, the library [Aeson](https://hackage.haskell.org/package/aeson) for coding and decoding).
@@ -53,12 +53,12 @@ instance FromJSON Nat where
   -- + Wrap the value.
   parseJSON jsonValue = do
       integerValue <- parseJSON jsonValue
-      assert (integerValue < 0 ) "Domain error"
+      assert (integerValue >= 0 ) "Domain error"
       pure . Nat $ integerValue
         
   parseJSONList jsonValues = do
       integerValues <- parseJSONList jsonValues
-      traverse_ (\n -> assert (n < 0) "Domain error") integerValues
+      traverse_ (\n -> assert (n >= 0) "Domain error") integerValues
       pure . fmap Nat $ integerValues
 ```
 
@@ -114,12 +114,12 @@ assert condition message = unless condition (fail message)
 instance FromJSON Nat where
   parseJSON jsonValue = do
       integerValue <- parseJSON jsonValue
-      assert (integerValue < 0 ) "Domain error"
+      assert (integerValue >= 0 ) "Domain error"
       pure . Nat $ integerValue
         
   parseJSONList jsonValues = do
       integerValues <- parseJSONList jsonValues
-      traverse_ (\n -> assert (n < 0) "Domain error") integerValues
+      traverse_ (\n -> assert (n >= 0) "Domain error") integerValues
       pure . fmap Nat $ integerValues
 ```
 
@@ -288,7 +288,7 @@ check baseValue = case eval baseValue of
 mkNat :: Int -> Maybe Nat
 -- now we can use check for every smart constructor!
 mkNat x | check x >= 0 = Just . Nat $ x
-mkNat _          = Nothing
+mkNat _                = Nothing
 ```
 
 ## And what do we get?
