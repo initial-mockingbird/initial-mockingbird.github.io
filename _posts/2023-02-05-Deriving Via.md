@@ -1,8 +1,8 @@
 ---
-title: "Deriving Strategies: A zero to hero tale."
+title: "Deriving Via: A zero to hero tale."
 date: 2023-02-05 03:00:00 -0400
 categories: [Haskell]
-tags: [haskell,functional programming, deriving strategies]
+tags: [haskell,functional programming, deriving via]
 ---
 
 Let's begin with a little motivation, after all, nice abstractions solve some kind of problem: let's say we are working on a Haskell backend that communicates with PostgreSQL. Thankfully, there are plenty of amazing libraries that allows us to query such database: [Esqueleto with a PostgreSQL backend](https://hackage.haskell.org/package/esqueleto), [Postgresql-simple](https://hackage.haskell.org/package/postgresql-simple) and [opaleye](https://hackage.haskell.org/package/opaleye) to name a few.
