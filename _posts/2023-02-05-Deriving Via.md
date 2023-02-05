@@ -27,7 +27,7 @@ mkNat x | x >= 0 = Just . Nat $ x
 mkNat _          = Nothing
 ```
 
-We will probably also need a way of serialize and deserialize this type, after all, the library will need a way to marshal values back and forth between the DBMS and Haskell. We shall use JSON as common representation(particularly, the library [Aeson](https://hackage.haskell.org/package/aeson) for coding and decoding).
+We will probably also need a way of serialize and deserialize this type, after all, the library will need a way to marshal values back and forth between the DBMS and Haskell. And although each library uses a different method (e.g: `PersistField` for esqueleto) we shall use JSON as common and simplified representation (particularly, the library [Aeson](https://hackage.haskell.org/package/aeson) for coding and decoding).
 
 And this is where things might start to get messy: [Aeson](https://hackage.haskell.org/package/aeson) has instances to marshal between `Int` and `JSON`, but it doesn't provide a way of doing so for our user defined type. Does that mean that we have to rewrite those instances for each of our custom types?
 
