@@ -14,7 +14,7 @@ Suppose that we are working with Haskell in the backend, and we need to communic
 Haskell, being the type safe language that it is, encourages us to make types that matches the domain, so for a non-negative inventory, we could have a type that looks like this:
 
 ```haskell
--- We expose just the type and its smart constructor
+-- We expose just the type and its smart constructor for now
 module Domains 
   ( Nat,
   mkNat
