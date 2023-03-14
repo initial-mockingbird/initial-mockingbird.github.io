@@ -46,7 +46,7 @@ node* map(? f, node* xs){
 
 But what type would `f` be? One option is to let it be a function pointer, and thus:
 
-```C
+```c
 typedef struct _list {
   int head;
   struct _list * tail;
