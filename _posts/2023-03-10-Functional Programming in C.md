@@ -418,9 +418,15 @@ lambda_res##A##B apply##A##B(lambda* f, lambda_res##A##B x){ \
 
 Which _might_ be useful in some cases... (maybe creating multiple `apply` functions, giving different interpretations for each result). But as far as I know, this will mostly defeat the purpose of defunctionalization (which is: knowing the functions beforehand and encode monomorphic versions of them). And also adds a couple of issues (such as we need to know the output type in order to create an input of type `lambda_res`).
 
+## A mix and match
+
+Notice that the interpreter `apply` is a function, and our initial `map` function accepts functions, thus we can call `map` with `apply` and solve the partial application issue for free!
+
 ## Final thoughts
 
 By now, we have explored two of ways of defining monomorphic and (parametric) polymorphic structures/functions, coupled with higher order functions: one that uses function pointers, and one that uses defunctionalization. Nevertheless, both approaches have some drawbacks:
 
 - The function pointers approach doesn't allow for partial application. It is too strict and has a NXM instances issue.
 - Defunctionalization is very flexible, allowing us to write multiple interpreters for the same set of functions (effectively expressing a DSL by making multiple apply functions). Nevertheless, we have encoded it using an initial method. And thus, we have to explicitly manage the union types and the implementation, which makes it hard to extend. A better approach would be encoding the options using an open-union instead of a closed one, and implement a visitor pattern. But this is material for another post!
+
+Yet, we can mix and match however we like in order to have the best of both worlds!
