@@ -23,7 +23,7 @@ So, it became desirable to have some functional utilities, not because it was im
 
 For now, let's tackle a simplified version of what we want to achieve, and then we can move on from there. Let's say that we have a list of a specific type: `int`, and that we want to make a `map` function over it, such that the function it takes returns an `int`:
 
-```C
+```c++
 typedef struct _node {
   int val;
   struct _node * next;
